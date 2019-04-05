@@ -16,6 +16,7 @@
 /** @type {typeof import('@adonisjs/framework/src/Route/Manager')} */
 const Route = use('Route')
 
-Route.get('/', () => {
-  return { greeting: 'Hello world in JSON' }
-})
+Route.group(() => {
+  Route.get('immunization/all-records', 'ImmunizationController.getAllRecords')
+  Route.post('immunization/child-registration', 'ImmunizationController.store')
+}).prefix('api/v1')
