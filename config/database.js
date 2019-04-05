@@ -6,7 +6,7 @@ const Env = use('Env')
 /** @type {import('@adonisjs/ignitor/src/Helpers')} */
 const Helpers = use('Helpers')
 const Url = require('url-parse')
-const CLEARDB_DATABASE_URL = new Url(Env.get('CLEARDB_DATABASE_URL'))
+const CLEARDB_DATABASE_URL = new Url('mysql://ba3d3bb98c948e:07193e81@us-cdbr-iron-east-03.cleardb.net/heroku_814615e1a314e73?reconnect=true')
 
 module.exports = {
   /*
