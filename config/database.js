@@ -6,7 +6,7 @@ const Env = use('Env')
 /** @type {import('@adonisjs/ignitor/src/Helpers')} */
 const Helpers = use('Helpers')
 const Url = require('url-parse')
-const CLEARDB_DATABASE_URL = new Url('mysql://ba3d3bb98c948e:07193e81@us-cdbr-iron-east-03.cleardb.net/heroku_814615e1a314e73?reconnect=true')
+const CLEARDB_DATABASE_URL = new Url(Env.get('CLEARDB_DATABASE_URL'))
 
 module.exports = {
   /*
@@ -53,11 +53,11 @@ module.exports = {
   mysql: {
     client: 'mysql',
     connection: {
-      host: Env.get('DB_HOST', CLEARDB_DATABASE_URL.host),
-      port: Env.get('DB_PORT', ''),
-      user: Env.get('DB_USER', CLEARDB_DATABASE_URL.username),
-      password: Env.get('DB_PASSWORD', CLEARDB_DATABASE_URL.password),
-      database: Env.get('DB_DATABASE', CLEARDB_DATABASE_URL.pathname.substr(1))
+      host: Env.get('NODE_ENV') == 'development' ? Env.get('DB_HOST', '') : CLEARDB_DATABASE_URL.host,
+      port: Env.get('NODE_ENV') == 'development' ? Env.get('DB_PORT', '') : '',
+      user: Env.get('NODE_ENV') == 'development' ? Env.get('DB_USER', '') : CLEARDB_DATABASE_URL.username,
+      password: Env.get('NODE_ENV') == 'development' ? Env.get('DB_PASSWORD', '') : CLEARDB_DATABASE_URL.password,
+      database: Env.get('NODE_ENV') == 'development' ? Env.get('DB_DATABASE', '') : CLEARDB_DATABASE_URL.pathname.substr(1)
     },
     debug: Env.get('DB_DEBUG', false)
   },
