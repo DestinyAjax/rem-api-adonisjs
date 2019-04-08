@@ -17,6 +17,12 @@
 const Route = use('Route')
 
 Route.group(() => {
-  Route.get('immunization/all-records', 'ImmunizationController.getAllRecords')
-  Route.post('immunization/child-registration', 'ImmunizationController.store')
+  /** immunication routes endpoints */
+  Route.get('immunization/all-records/:type', 'ImmunizationController.getAllRecords')
+  Route.post('immunization/child-registration', 'ImmunizationController.store') 
+  Route.post('immunization/search-records', 'ImmunizationController.searchRecords')
+  Route.post('immunization/child-profile', 'ImmunizationController.getProfile')
+
+  /** vaccination routes endpoints */
+
 }).prefix('api/v1')

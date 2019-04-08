@@ -29,12 +29,41 @@ class ImmunizationController {
         }) 
     }
 
-    async getAllRecords({request, response}) {
-        const records = await ImmunizationRecord.all()
-        response.status(201).json({
+    async getAllRecords({params, request, response}) {
+        if(params.type === 'records') {
+            const records = await ImmunizationRecord.all()
+            response.status(201).json({
+                status: 'success',
+                data: records
+            })
+        }
+    }
+
+    async getProfile({ request, response }) {
+        const profile = await ImmunizationRecord.findBy('registration_id', request.input('reg_id'));
+        if(profile) {
+            response.status(200).json({
+                status: 'success',
+                data: profile
+            });
+        }
+    }
+
+    async searchRecords({ request, response }) {
+        const params = request.only(['gender', 'phone_number', 'state', 'language', 'registration_id', 'start_date', 'end_date']);
+        
+        const records = await Database.from('immunization_records')
+        .where('gender', params.gender)
+        .orWhere('state', params.state)
+        .orWhere('phone_number', params.phone_number)
+        .orWhere('registration_id', params.registration_id)
+        .orWhere('preferred_language', params.language)
+        .orWhereBetween('date_of_birth', [new Date(params.start_date), new Date(params.end_date)]);
+        
+        response.status(200).json({
             status: 'success',
             data: records
-        })
+        });
     }
 }
 
