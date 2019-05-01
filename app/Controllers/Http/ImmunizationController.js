@@ -30,13 +30,11 @@ class ImmunizationController {
     }
 
     async getAllRecords({params, request, response}) {
-        if(params.type === 'records') {
-            const records = await ImmunizationRecord.all()
-            response.status(201).json({
-                status: 'success',
-                data: records
-            })
-        }
+        const records = await ImmunizationRecord.all()
+        response.status(201).json({
+            status: 'success',
+            data: records
+        })
     }
 
     async getProfile({ request, response }) {
