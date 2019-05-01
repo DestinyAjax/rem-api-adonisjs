@@ -12,7 +12,7 @@ class UssdController {
                 2. My phone number`
 
         } else if(params.text === "1") {
-
+            response = `END Your phone number is ${params.phoneNumber}`;
         }
 
         response.header('Content-type', 'text/plain')
