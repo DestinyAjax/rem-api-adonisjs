@@ -2,21 +2,21 @@
 
 class UssdController {
     
-    async index ({request, res}) {
+    async index ({request, response}) {
         const params = request.only(['sessionId', 'serviceCode', 'phoneNumber', 'text'])
-        let response = ''
+        let res = ''
 
         if(params.text === "") {
-            response = `CON Welcome to RemindMe Service
+            res = `CON Welcome to RemindMe Service
                 1. My account
-                2. My phone number`;
+                2. My phone number`
 
         } else if(params.text === "1") {
 
         }
 
-        res.header('Content-type', 'text/plain')
-        res.send(response)
+        response.header('Content-type', 'text/plain')
+        response.send(res)
     }
 }
 

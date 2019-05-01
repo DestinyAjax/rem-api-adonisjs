@@ -27,6 +27,6 @@ Route.group(() => {
   Route.get('immunization/dashboard', 'HomeController.index')
 
   /** USSD routes endpoints */
-  Route.post('immunization/ussd/create', 'UssdController.index')
+  Route.post('ussd/create', 'UssdController.index')
 
 }).prefix('api/v1')
