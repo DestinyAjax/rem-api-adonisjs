@@ -10,7 +10,7 @@ class UssdController {
         let res = ''
 
         if (params.text === "") {
-            res = `${SESSION_CONTINUE} Welcome to RemindMe Service
+            res = `${SESSION_CONTINUE}Welcome to RemindMe Service
             Press
             1. Immunization
             2. Maternal care
@@ -19,11 +19,11 @@ class UssdController {
             5. Unsubscribe`
 
         } else if(params.text === "1") {
-            res = `${SESSION_END} Your phone number is ${params.phoneNumber}`;
+            res = `${SESSION_END}Your phone number is ${params.phoneNumber}`;
         }
 
         response.header('Content-type', 'text/plain')
-        response.status(RESPONSE_CODE).send(res)
+        await response.status(RESPONSE_CODE).send(res)
     }
 }
 
